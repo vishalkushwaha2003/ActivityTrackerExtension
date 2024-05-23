@@ -1,5 +1,16 @@
+import BackgroundAnimation from "../backgroundanimation/BackgroundAnimation";
+
 const Stats = () => {
-  return <div>Stats</div>;
+
+  return <>
+  <BackgroundAnimation/>
+
+
+    <div>Stats</div>
+  
+  
+  
+  </>;
 };
 
 export default Stats;
