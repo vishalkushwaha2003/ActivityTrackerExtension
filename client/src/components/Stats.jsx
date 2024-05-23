@@ -1,3 +1,4 @@
+import LineChart from "../charts/LineChart";
 
 
 const Stats = () => {
@@ -5,8 +6,11 @@ const Stats = () => {
   return <>
   
 
-  
-    <div>Stats</div>
+   
+    <div>
+
+      <LineChart/>
+    </div>
   
   
   
