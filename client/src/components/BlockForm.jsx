@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+
 const BlockForm = () => {
   const [selectedDays, setSelectedDays] = useState([
     false,
@@ -66,6 +67,9 @@ const BlockForm = () => {
   };
 
   return (
+    <>
+    
+    
     <div className="text-center mt-5 text-[#b3b4b4]">
       {/* <h1 className="text-xl font-semibold">Block Website</h1> */}
       <div className="flex flex-col justify-center items-center">
@@ -204,7 +208,7 @@ const BlockForm = () => {
 
       {isOverlay && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-[rgba(33,33,33,255)] p-4 rounded-md shadow-md flex flex-col items-center">
+          <div className="bg-[rgba(20,20,20,255)] p-4 rounded-md shadow-md flex flex-col items-center">
             <h1 className="text-base mb-4 text-center">{message}</h1>
             <button
               className="bg-[rgba(47,47,47,255)] px-4 py-2 rounded-md hover:cursor-pointer hover:bg-[rgb(57,57,57)]"
@@ -216,6 +220,7 @@ const BlockForm = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

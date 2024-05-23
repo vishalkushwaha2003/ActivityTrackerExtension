@@ -5,14 +5,7 @@
 
 -- Start BackGround Animation 
 */
-.area {
-	background: #000000;
-	background: -webkit-linear-gradient(to left, #43444e4f, #40415236);
-	width: 100%;
-	height: 100vh;
-	position: absolute;
-	z-index: -1;
-}
+
 
 .circles {
 	position: absolute;
@@ -136,7 +129,7 @@
 /* General scrollbar styles */
 ::-webkit-scrollbar {
     width: 1px;
-    height: 2px; /* Added to ensure horizontal scrollbar height is also 1px */
+    height: 2px; 
 }
 
 ::-webkit-scrollbar-track {
