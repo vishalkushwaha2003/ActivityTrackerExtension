@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BlockForm from "./components/BlockForm";
 import Stats from "./components/Stats";
+import BackgroundAnimation from "./backgroundanimation/BackgroundAnimation";
 
 const App = () => {
   const [active, setActive] = useState(1);
@@ -8,7 +9,10 @@ const App = () => {
     setActive(index);
   };
   return (
-    <div className="">
+    <>
+    <BackgroundAnimation/>
+
+<div className="">
       <div className="bg-[rgba(47,47,47,255)] flex text-base h-8 text-[#9b9b9a] hover:z-100 hover:bg-[rgba(65,65,65,255)]">
         <div
           onClick={() => clickHandler(1)}
@@ -46,6 +50,8 @@ const App = () => {
         {active === 2 && <BlockForm />}
       </div>
     </div>
+    
+    </>
   );
 };
 
