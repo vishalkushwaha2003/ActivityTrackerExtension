@@ -1,11 +1,12 @@
 {
   "manifest_version": 3,
   "name": "Activity Tracker",
-  "description": "Track and manage desktop browsing habits. Set goals for social media usage. Receive real-time notifications. Foster mindful online balance.",
+  "description": "Track and manage desktop browsing habits. Set goals for social media usage. Keep track of your client.",
   "version": "0.0.1",
   "icons": {
     "48": "logo.png"
   },
+  
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
@@ -18,5 +19,5 @@
   "action": {
     "default_popup": "./index.html"
   },
-  "permissions": ["activeTab", "storage"]
+  "permissions": ["tabs","webNavigation","activeTab", "storage"]
 }
