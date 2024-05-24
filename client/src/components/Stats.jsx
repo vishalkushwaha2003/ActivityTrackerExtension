@@ -1,21 +1,21 @@
-import DoughnutChart from "../charts/DoughnutChart";
-import LineChart from "../charts/LineChart";
+import Carousel from "../carousel/Carousel";
+
 
 
 const Stats = () => {
 
-  return <>
+  return (
+  
   
 
-   
-    <div>
-      <DoughnutChart/>
-      <LineChart/>
+  <div className="w-[300px] h-[400px]  overflow-y-scroll">
+     <Carousel/>
     </div>
   
   
   
-  </>;
+  )
+  
 };
 
 export default Stats;
