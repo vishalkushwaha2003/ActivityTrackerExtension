@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
-
+import InteractionCharts from "../charts/InteractionCharts";
 
 import Divider from '@mui/material/Divider';
-import DoughnutChart from "../charts/DoughnutChart";
-import LineChart from "../charts/LineChart";
+
 
 
 
@@ -69,12 +68,12 @@ const Carousel = () => {
                
              
              
-             <DoughnutChart/>
+               <InteractionCharts/>
               {/* <Divider  sx={{
                 backgroundColor:'white'
                }}/> */}
 
-              <LineChart/>
+              
                <span className="absolute top-6 left-1/2 text-sm  text-white/80 hover:text-white/80 transform -translate-x-1/2 -translate-y-1/2 ">
                 {slide.caption}
               </span>

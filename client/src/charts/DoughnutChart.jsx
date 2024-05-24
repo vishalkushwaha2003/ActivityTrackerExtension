@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { Chart, ArcElement, Tooltip, Legend,Plugin } from 'chart.js';
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = () => {
+const DoughnutChart = ({ onSegmentClick }) => {
   const chartRef = useRef(null);
 
   const totalCenterPlugin = {
@@ -24,7 +24,7 @@ const DoughnutChart = () => {
   };
 
   const data = {
-    labels: ['Redkjnknknkkkjnkjnkjnkj', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [{
       label: 'Dataset 1',
       data: [300, 50, 100, 75, 125, 150],
@@ -54,48 +54,28 @@ const DoughnutChart = () => {
     plugins: {
       legend: {
         display:false,
-        // position:'bottom',
-        // labels: {
-        //     font: {
-        //       size: 14, // Set font size
-        //       family: 'Arial, sans-serif', // Set font family
-        //       weight: 'bold' // Set font weight
-        //     },
-        //     color: 'white', // Set font color
-        //     padding: 20, // Set padding around labels
-        //     usePointStyle: true, // Use point style for labels
-        //     boxWidth: 20, // Set width of the color box
-        //     boxHeight: 20, // Set height of the color box
-        //   }
       },
       tooltip: {
         backgroundColor: '#424242',
         titleColor: '#fff',
         bodyColor: '#fff',
-      
         footerColor: '#fff'
       }
     },
-    
-
+    onClick: (e, activeElements) => {
+      if (activeElements.length > 0) {
+        const index = activeElements[0].index;
+        onSegmentClick(index);
+      }
+    }
   };
 
-  useEffect(() => {
-    const chart = chartRef.current;
-
-    // Example of updating the chart dynamically
-    setTimeout(() => {
-      chart.data.datasets[0].data = [200, 100, 150, 50, 90, 130];
-      chart.update();
-    }, 5000);
-  }, []);
-
   return (
-    <div className="flex flex-col items-center  bg-transparent">
+    <div className="flex flex-col items-center bg-transparent">
       <div className="h-[200px] py-8 mt-10">
         <Doughnut data={data} options={options} plugins={[totalCenterPlugin]} ref={chartRef} />
       </div>
-      <div className=" px-2 w-full cursor-grab  overflow-x-auto">
+      <div className="px-2 w-full cursor-grab overflow-x-auto">
         <div className="flex mb-4 space-x-4">
           {data.labels.map((label, index) => (
             <div key={index} className="flex items-center space-x-2">
@@ -111,4 +91,5 @@ const DoughnutChart = () => {
     </div>
   );
 };
+
 export default DoughnutChart;
