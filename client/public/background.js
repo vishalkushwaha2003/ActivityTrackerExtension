@@ -1,4 +1,6 @@
-importScripts('timer.js','onActiveTab.js','onUpdateTab.js');
+
+ importScripts('timer.js','onUpdateTab.js','onActiveTab.js');
+  
 
 activeTabs = {};
 
