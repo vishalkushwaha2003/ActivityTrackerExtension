@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "React Block Sites",
+  "name": "Activity Tracker",
+  "description": "Track and manage desktop browsing habits. Set goals for social media usage. Receive real-time notifications. Foster mindful online balance.",
   "version": "0.0.1",
   "icons": {
     "48": "logo.png"
