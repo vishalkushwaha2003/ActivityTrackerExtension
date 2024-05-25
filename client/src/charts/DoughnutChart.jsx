@@ -10,15 +10,18 @@ const DoughnutChart = ({ onSegmentClick }) => {
   const totalCenterPlugin = {
     id: 'totalCenterPlugin',
     beforeDraw: function(chart) {
-      const { ctx, chartArea: { width, height } } = chart;
+      const { ctx, chartArea: { top, bottom, left, right } } = chart;
       ctx.save();
       ctx.font = 'bold 20px Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = 'white';
-  
+
       const total = chart.data.datasets[0].data.reduce((acc, curr) => acc + curr, 0);
-      ctx.fillText(total, width / 2, height / 2);
+      const centerX = (left + right) / 2;
+      const centerY = (top + bottom) / 2;
+
+      ctx.fillText(total, centerX, centerY);
       ctx.restore();
     }
   };
@@ -27,14 +30,14 @@ const DoughnutChart = ({ onSegmentClick }) => {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [{
       label: 'Dataset 1',
-      data: [300, 50, 100, 75, 125, 150],
+      data: [20, 1, 18, 4, 29, 14],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
       ],
       borderColor: [
         'rgba(255, 99, 132, 1)',
@@ -50,13 +53,21 @@ const DoughnutChart = ({ onSegmentClick }) => {
 
   const options = {
     responsive: true,
-    cutout: "80%",
+    cutout: "80%", // Adjusted cutout percentage for more visible padding
+    layout: {
+      padding: {
+        top: 20,
+        bottom: 20,
+        left: 20,
+        right: 20
+      }
+    },
     plugins: {
       legend: {
-        display:false,
+        display: false,
       },
       tooltip: {
-        backgroundColor: '#424242',
+        backgroundColor: 'rgba(22,22,22,1)',
         titleColor: '#fff',
         bodyColor: '#fff',
         footerColor: '#fff'
@@ -67,12 +78,30 @@ const DoughnutChart = ({ onSegmentClick }) => {
         const index = activeElements[0].index;
         onSegmentClick(index);
       }
+    },
+    hover: {
+      onHover: function(e, elements) {
+        if (elements.length > 0) {
+          e.native.target.style.cursor = 'pointer';
+        } else {
+          e.native.target.style.cursor = 'default';
+        }
+      }
+    },
+    animation: {
+      animateRotate: true,
+      animateScale: true,
+    },
+    elements: {
+      arc: {
+        hoverOffset: 15, // Increase the hover offset to scale the segment
+      }
     }
   };
 
   return (
     <div className="flex flex-col items-center bg-transparent">
-      <div className="h-[200px] py-8 mt-10">
+      <div className="h-[200px] mt-9">
         <Doughnut data={data} options={options} plugins={[totalCenterPlugin]} ref={chartRef} />
       </div>
       <div className="px-2 w-full cursor-grab overflow-x-auto">
