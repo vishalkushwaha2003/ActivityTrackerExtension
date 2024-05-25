@@ -5,6 +5,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip);
 
 const LineChart = ({ data }) => {
+     console.log(data)
   const options = {
     responsive: true,
     plugins: {
@@ -13,7 +14,7 @@ const LineChart = ({ data }) => {
       }
     },
     borderWidth: 0.8,
-    borderColor: "white",
+    borderColor: data.datasets[0].bgColor,
     scales: {
       x: {
         grid: {
