@@ -1,8 +1,8 @@
-
- importScripts('timer.js','onUpdateTab.js','onActiveTab.js');
+importScripts('timer.js','onUpdateTab.js','onActiveTab.js');
   
 
 activeTabs = {};
+tabdata=[];
 
 let hours = 0;
 let minutes = 0;
@@ -25,3 +25,15 @@ chrome.windows.onCreated.addListener((window) => {
   //   console.log("Value is " + result.preTab);
   // });
 });
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  
+  console.log(message.data);
+  // console.log(sender);
+  // console.log(sendResponse);
+  chrome.runtime.sendMessage({ action: "sendDataToPopup", data:tabdata });
+});
+
+
+
+

@@ -1,7 +1,9 @@
 //on update tabs events
 chrome.tabs.onUpdated.addListener((p, t, tab2) => {
+ 
     if (tab2.url != "chrome://newtab/" && preTab != tab2.url) {
       if (preTab != "" && activeTabs[preTab]) {
+        tabdata.push(tab2);
         stopTimer();
         activeTabs[preTab].totalTime = `${hours}:${minutes}:${seconds}`;
         console.log(preTab);

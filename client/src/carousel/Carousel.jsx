@@ -3,6 +3,7 @@ import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import InteractionCharts from "../charts/InteractionCharts";
 
+
 import Divider from '@mui/material/Divider';
 
 
@@ -67,8 +68,9 @@ const Carousel = () => {
                
                
              
-             
+               
                <InteractionCharts/>
+              
               {/* <Divider  sx={{
                 backgroundColor:'white'
                }}/> */}
