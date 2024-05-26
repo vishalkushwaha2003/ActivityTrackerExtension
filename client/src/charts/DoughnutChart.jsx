@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 
@@ -6,6 +6,44 @@ Chart.register(ArcElement, Tooltip, Legend);
 
 const DoughnutChart = ({ onSegmentClick }) => {
   const chartRef = useRef(null);
+  const [total, setTotal] = useState(0);
+  const totalRef = useRef(total);
+
+  useEffect(() => {
+    const chart = chartRef.current;
+    const totalValue = chart.data.datasets[0].data.reduce((acc, curr) => acc + curr, 0);
+
+    const incrementTotal = (start, end, duration) => {
+      const startTime = performance.now();
+
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const animatedTotal = Math.round(start + (end - start) * progress);
+        setTotal(animatedTotal);
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          setTotal(end); // Ensure the final value is set
+        }
+      };
+
+      requestAnimationFrame(animate);
+    };
+
+    chart.options.animation = {
+      onProgress: () => {
+        incrementTotal(0, totalValue, 1000); // Animate over 1 second
+      },
+    };
+
+    chart.update();
+  }, []);
+
+  useEffect(() => {
+    totalRef.current = total;
+  }, [total]);
 
   const totalCenterPlugin = {
     id: 'totalCenterPlugin',
@@ -17,11 +55,10 @@ const DoughnutChart = ({ onSegmentClick }) => {
       ctx.textBaseline = 'middle';
       ctx.fillStyle = 'white';
 
-      const total = chart.data.datasets[0].data.reduce((acc, curr) => acc + curr, 0);
       const centerX = (left + right) / 2;
       const centerY = (top + bottom) / 2;
 
-      ctx.fillText(total, centerX, centerY);
+      ctx.fillText(totalRef.current, centerX, centerY);
       ctx.restore();
     }
   };
@@ -30,7 +67,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [{
       label: 'Dataset 1',
-      data: [20, 1, 18, 4, 29, 14],
+      data: [80, 100, 180, 40, 29, 140],
       backgroundColor: [
         'rgba(255, 99, 132, 1)',
         'rgba(54, 162, 235, 1)',
