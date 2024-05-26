@@ -59,16 +59,18 @@ const BlockCard = ({ url, startTime, endTime, days }) => {
         ctx.fillText(text, positionX + offsetX, bottom + offsetY);
       }
 
-      labels("0", "left", left, 12, -18); // 10px to the right, 10px up
-      labels("9", "right", right, -16, -18); // 10px to the left, 10px up
+      labels("0", "left", left, 12, -18);
+      labels("9", "right", right, -16, -18);
     },
   };
 
   return (
-    <div className="">
-      <div>{url}</div>
-      <div>
-        <Doughnut data={data} options={options} plugins={[gaugeLabels]} />
+    <div className="bg-card-blur m-4 w-60 h-52 rounded-lg shadow-lg">
+      <div className="bg-card-content flex flex-col items-center">
+        <div className="text-[#9b9b9a] mb-4">{url}</div>
+        <div className="w-60 h-32 flex justify-center">
+          <Doughnut data={data} options={options} plugins={[gaugeLabels]} />
+        </div>
       </div>
     </div>
   );

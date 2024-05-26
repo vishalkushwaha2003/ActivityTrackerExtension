@@ -30,12 +30,12 @@ const dummyData = [
 
 const BlockStats = () => {
   return (
-    <>
+    <div className="flex flex-col justify-center items-center">
       <div className="text-[#5a5a59]">
         <h1>All Blocked Sites</h1>
       </div>
 
-      <div>
+      <div className="">
         <BlockCard
           url={dummyData[0].url}
           startTime={dummyData[0].startTime}
@@ -43,7 +43,7 @@ const BlockStats = () => {
           days={dummyData[0].days}
         />
       </div>
-    </>
+    </div>
   );
 };
 
