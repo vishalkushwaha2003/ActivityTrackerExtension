@@ -14,7 +14,7 @@ chrome.tabs.onActivated.addListener(() => {
         resetTimer();
         
         // Send previous tab data to the API
-        
+         console.log("first previous tab data",inactivePreTabInfo)
         sendPreTabData(inactivePreTabInfo);
       }
       startTimer();
@@ -29,11 +29,20 @@ chrome.tabs.onActivated.addListener(() => {
 
       preTab = tab[0].url;
 
+      inactivePreTabInfo = {
+        "id":tab[0].id,
+        "windowId":tab[0].windowId,
+        "userId":user.userId,
+      }
+
+
+
+
       // Send new active tab data to the API
-      console.log("userId",user.userId);
+      // console.log("userId",user.userId);
      const createTab={...tab[0],...user};
       sendCreatTabData(createTab);
-      console.log(createTab);
+      // console.log(createTab);
       
     }
 
@@ -53,8 +62,11 @@ chrome.tabs.onActivated.addListener(() => {
           "windowId":tab[0].windowId,
           "userId":user.userId,
         }
-
+        console.log("second pretabinfo",inactivePreTabInfo)
+        
         sendPreTabData(inactivePreTabInfo);
+
+
         preTab = tab[0].url;
       }
     }
@@ -68,7 +80,7 @@ chrome.tabs.onActivated.addListener(() => {
 
 
 function sendPreTabData(tabData) {
-  fetch('http://192.168.0.96:8080/tabs/closedTab', {
+  fetch('http://192.168.29.141:8080/tabs/closedTab', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -76,21 +88,30 @@ function sendPreTabData(tabData) {
     body: JSON.stringify(tabData),
   })
   .then(response => {
-    response.json(); 
-  const res=response.json();
-  console.log("response from server by closed tab successfully",res);
-})
-  .then(data => {
-    console.log(' close tab Success:', data);
+    const contentType = response.headers.get('Content-Type');
+    
+    if (contentType && contentType.includes('application/json')) {
+      return response.json().then(data => ({ data, contentType }));
+    } else {
+      return response.text().then(data => ({ data, contentType }));
+    }
+  })
+  .then(({ data, contentType }) => {
+    if (contentType && contentType.includes('application/json')) {
+      console.log('Close tab Success (JSON):', data);
+    } else {
+      console.log('Close tab Success (Non-JSON):', data);
+    }
   })
   .catch((error) => {
     console.error('Error:', error);
   });
 }
+
 
 
 function sendCreatTabData(tabData) {
-  fetch('http://192.168.0.96:8080/tabs/activeTab', {
+  fetch('http://192.168.29.141:8080/tabs/activeTab', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -98,13 +119,23 @@ function sendCreatTabData(tabData) {
     body: JSON.stringify(tabData),
   })
   .then(response => {
-    const res=response.json()
-    console.log("response from server by create tab successfully",res);
+    const contentType = response.headers.get('Content-Type');
+    
+    if (contentType && contentType.includes('application/json')) {
+      return response.json().then(data => ({ data, contentType }));
+    } else {
+      return response.text().then(data => ({ data, contentType }));
+    }
   })
-  .then(data => {
-    console.log('create tab Success:', data);
+  .then(({ data, contentType }) => {
+    if (contentType && contentType.includes('application/json')) {
+      console.log('create tab Success (JSON):', data);
+    } else {
+      console.log('create tab Success (Non-JSON):', data);
+    }
   })
   .catch((error) => {
     console.error('Error:', error);
   });
 }
+
