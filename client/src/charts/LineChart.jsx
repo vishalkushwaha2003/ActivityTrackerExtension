@@ -5,9 +5,11 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip);
 
 const LineChart = ({ data }) => {
-     console.log(data)
+  console.log(data);
+
   const options = {
     responsive: true,
+    maintainAspectRatio: false, // Allow chart to take the full height of its container
     plugins: {
       legend: {
         display: false // Hide the legend
@@ -31,9 +33,13 @@ const LineChart = ({ data }) => {
     }
   };
 
+  // Calculate the width based on the number of labels
+  const labelCount = data.labels.length;
+  const chartWidth = labelCount * 50; // 50px per label, adjust as needed
+
   return (
     <div className="w-full py-5 overflow-x-scroll">
-      <div className="w-[500px] h-[200px]">
+      <div className="relative h-[200px]" style={{ width: `${chartWidth}px` }}>
         <Line data={data} options={options} />
       </div>
     </div>

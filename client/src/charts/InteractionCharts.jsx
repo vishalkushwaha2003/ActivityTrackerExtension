@@ -32,7 +32,7 @@ const InteractionCharts = () => {
     ]
     
     setLineData({
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Jan"],
       datasets: [{
         data: newData[index],
         bgColor:backgroundColor[index],
