@@ -1,8 +1,10 @@
 importScripts('timer.js','onUpdateTab.js','onActiveTab.js');
   
 
-activeTabs = {};
+inactivePreTabInfo = {};
 tabdata=[];
+activeTabs={}
+user={"userId": "513a3660-257d-45f9-94eb-5e51d5cdfbaf"};
 
 let hours = 0;
 let minutes = 0;
