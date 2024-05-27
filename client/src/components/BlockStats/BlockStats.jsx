@@ -1,4 +1,3 @@
-
 /* eslint-disable no-unused-vars */
 import BlockCard from "./BlockCard";
 
@@ -31,12 +30,36 @@ const dummyData = [
 
 const BlockStats = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="text-[#5a5a59]">
+    <div className="flex flex-col justify-center items-center ">
+      <div className="text-[#c7c7c6] mt-2 text-base pb-2">
         <h1>All Blocked Sites</h1>
       </div>
 
-      <div className="">
+      <div className="h-[310px] overflow-y-scroll">
+        <BlockCard
+          url={dummyData[0].url}
+          startTime={dummyData[0].startTime}
+          endTime={dummyData[0].endTime}
+          days={dummyData[0].days}
+        />
+        <BlockCard
+          url={dummyData[0].url}
+          startTime={dummyData[0].startTime}
+          endTime={dummyData[0].endTime}
+          days={dummyData[0].days}
+        />
+        <BlockCard
+          url={dummyData[0].url}
+          startTime={dummyData[0].startTime}
+          endTime={dummyData[0].endTime}
+          days={dummyData[0].days}
+        />
+        <BlockCard
+          url={dummyData[0].url}
+          startTime={dummyData[0].startTime}
+          endTime={dummyData[0].endTime}
+          days={dummyData[0].days}
+        />
         <BlockCard
           url={dummyData[0].url}
           startTime={dummyData[0].startTime}

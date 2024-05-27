@@ -9,7 +9,7 @@ const App = () => {
     setActive(index);
   };
   return (
-    <div className=" h-[100vh] bg-transparent">
+    <div className=" h-[100vh] bg-transparent ">
       <BackgroundAnimation />
       <div className="">
         <div className="bg-[rgba(47,47,47,255)] flex text-base h-8 text-[#9b9b9a] hover:z-100 hover:bg-[rgba(65,65,65,255)]">

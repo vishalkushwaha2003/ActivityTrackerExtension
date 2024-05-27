@@ -22,7 +22,7 @@ const BlockPage = () => {
       {isForm && <BlockForm />}
       {!isForm && <BlockStats />}
 
-      <div className="absolute bottom-0 bg-[rgba(28,28,28,255)] text-[#9b9b9a] w-full h-11   ">
+      <div className="fixed bottom-0 bg-[rgba(28,28,28,255)] text-[#9b9b9a] w-full h-11   ">
         <div className="mx-6 flex justify-between pt-1">
           <button onClick={newBlockHandler}>
             <div className="flex flex-col">
