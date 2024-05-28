@@ -75,15 +75,23 @@ const DoughnutChart = ({ onSegmentClick }) => {
     beforeDraw: function(chart) {
       const { ctx, chartArea: { top, bottom, left, right } } = chart;
       ctx.save();
+      
+      // Calculate positions
+      const centerX = (left + right) / 2;
+      const centerY = (top + bottom) / 2;
+      
+      // Draw the total value
       ctx.font = 'bold 20px Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = 'white';
+      ctx.fillText(totalRef.current, centerX, centerY - 8); // Adjust y-position for spacing
+      
+      // Draw the "min" label
+      ctx.font = '14px Arial';
+      ctx.fillStyle = 'yellow'; // Change color for "min"
+      ctx.fillText('min', centerX, centerY + 12); // Adjust y-position for spacing
 
-      const centerX = (left + right) / 2;
-      const centerY = (top + bottom) / 2;
-
-      ctx.fillText(totalRef.current, centerX, centerY);
       ctx.restore();
     }
   };
