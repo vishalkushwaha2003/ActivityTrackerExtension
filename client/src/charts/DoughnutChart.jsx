@@ -13,7 +13,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [{
       label: 'Dataset 1',
-      data: [20, 15, 2, 7, 29, 140],
+      data: [20, 150, 2, 700, 29, 140],
       backgroundColor: [
         'rgba(255, 99, 132, 1)',
         'rgba(54, 162, 235, 1)',
@@ -160,4 +160,4 @@ const DoughnutChart = ({ onSegmentClick }) => {
 
 export default DoughnutChart;
 
-export const doughnutChartData = [20, 15, 2, 7, 29, 140]; // Export the total data
+export const doughnutChartData = [20, 150, 2, 700, 29, 140] // Export the total data
