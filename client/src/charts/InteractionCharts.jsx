@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import DoughnutChart from './DoughnutChart';
+import DoughnutChart, { doughnutChartData } from './DoughnutChart';
 import LineChart from './LineChart';
 
 const InteractionCharts = () => {
-  // Initial data for the line chart, matching the first segment of the doughnut chart
-  const initialLineData = [15, 30, 10, 18, 20, 2, 17];
-  const initialBgColor = 'rgba(255, 99, 132, 1)'; // Color matching the first segment
+  // Initialize line chart data with the total data from doughnut chart
+  const initialLineData = doughnutChartData;
+  const initialBgColor = 'rgba(255, 255, 255, 1)'; // Color matching the first segment
 
   const [lineData, setLineData] = useState({
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [{
       data: initialLineData,
       bgColor: initialBgColor,
