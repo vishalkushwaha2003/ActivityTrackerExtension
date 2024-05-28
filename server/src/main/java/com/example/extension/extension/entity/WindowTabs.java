@@ -30,12 +30,12 @@ public class WindowTabs {
     private int groupId;
 //    private int height;
 //    private boolean highlighted;
-    private int id;
+    private Integer id;
     private boolean incognito;
 //    private int index;
     private double lastAccessed;
 
-    private int openerTabId;
+//    private Integer openerTabId;
 //    private String pendingUrl;
     private boolean pinned;
     private boolean selected;
@@ -43,12 +43,12 @@ public class WindowTabs {
     private String title;
     private String url;
     private int width;
-    private int windowId;
+    private Integer windowId;
 
 
 
-    private Date startTimeStamp;
+ //   private Date startTimeStamp;
     private int tabDuration;
-    private Date endTimeStamp;
+//    private Date endTimeStamp;
 
 }

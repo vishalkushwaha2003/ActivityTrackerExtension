@@ -1,6 +1,10 @@
 package com.example.extension.extension.controller;
 
 import com.example.extension.extension.model.BlockDTO;
+import com.example.extension.extension.service.UserService;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -16,8 +20,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Slf4j
 public class SocketController {
 
+
+
+    @Autowired
+    UserService userService;
+
     @Autowired
     SimpMessageSendingOperations messagingTemplate;
+
+    @Autowired
+    Gson gson;
 
 
 //    @MessageMapping("/chat.sendMessage")
@@ -49,14 +61,38 @@ public class SocketController {
 //
 //
 //        chatService.addChat(chatMessage);
-//    }
-
+//
 
 
     @MessageMapping("/test")
-    @SendTo("/topic/public")
-    public void Testing(@Payload BlockDTO blockDTO){
-        log.info(blockDTO.getMessage());
-        messagingTemplate.convertAndSend("/topic/public", "Kya beta !!");
+    @SendTo("/topic/513a3660-257d-45f9-94eb-5e51d5cdfbaf")
+    public void Testing(@Payload String message){
+
+        JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
+        log.info(jsonObject.get("message").getAsString());
+        messagingTemplate.convertAndSend("/topic/513a3660-257d-45f9-94eb-5e51d5cdfbaf","Hello Raman");
+    }
+
+
+    @MessageMapping("/block")
+//    @SendTo("/topic/public")
+    public void Blocking(@Payload BlockDTO blockDTO, SimpMessageHeaderAccessor headerAccessor){
+//        log.info(blockDTO.getMessage());
+//        messagingTemplate.convertAndSend("/topic/public", "Kya beta !!");
+
+        log.info("user Id" +blockDTO.getUserId());
+        log.info(blockDTO.toString());
+        userService.updateBlockList(blockDTO);
+    }
+
+
+    @MessageMapping("/unblock")
+    public void Unblocking(@Payload String unblockInfo){
+        JsonObject jsonObject = gson.fromJson(unblockInfo, JsonObject.class);
+        String userId=jsonObject.get("userId").getAsString();
+        String blockId=jsonObject.get("blockId").getAsString();
+
+        log.info(userId+"   unblocking  "+blockId);
+        userService.unblock(userId,blockId);
     }
 }
