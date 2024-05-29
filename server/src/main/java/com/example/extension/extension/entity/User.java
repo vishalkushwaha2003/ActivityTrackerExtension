@@ -23,5 +23,8 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "closedTabs",referencedColumnName = "userId")
     List<WindowTabs> closedTabs;
+    @OneToMany
+    @JoinColumn(name = "blockList",referencedColumnName = "userId")
+    List<BlockedSites> blockedSitesList;
 
 }

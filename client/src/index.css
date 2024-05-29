@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
--- Start BackGround Animation */ .circles {
+/* -- Start BackGround Animation */  
+
+.circles {
   position: absolute;
   top: 0;
   left: 0;

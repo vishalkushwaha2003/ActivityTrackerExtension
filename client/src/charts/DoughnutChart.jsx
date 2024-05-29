@@ -9,6 +9,31 @@ const DoughnutChart = ({ onSegmentClick }) => {
   const [total, setTotal] = useState(0);
   const totalRef = useRef(total);
 
+  const data = {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: 'Dataset 1',
+      data: [20, 150, 2, 700, 29, 140],
+      backgroundColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 0.1,
+    }]
+  };
+
   useEffect(() => {
     const chart = chartRef.current;
     const totalValue = chart.data.datasets[0].data.reduce((acc, curr) => acc + curr, 0);
@@ -50,42 +75,25 @@ const DoughnutChart = ({ onSegmentClick }) => {
     beforeDraw: function(chart) {
       const { ctx, chartArea: { top, bottom, left, right } } = chart;
       ctx.save();
+      
+      // Calculate positions
+      const centerX = (left + right) / 2;
+      const centerY = (top + bottom) / 2;
+      
+      // Draw the total value
       ctx.font = 'bold 20px Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = 'white';
+      ctx.fillText(totalRef.current, centerX, centerY - 8); // Adjust y-position for spacing
+      
+      // Draw the "min" label
+      ctx.font = '14px Arial';
+      ctx.fillStyle = 'yellow'; // Change color for "min"
+      ctx.fillText('min', centerX, centerY + 12); // Adjust y-position for spacing
 
-      const centerX = (left + right) / 2;
-      const centerY = (top + bottom) / 2;
-
-      ctx.fillText(totalRef.current, centerX, centerY);
       ctx.restore();
     }
-  };
-
-  const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [{
-      label: 'Dataset 1',
-      data: [80, 100, 180, 40, 29, 140],
-      backgroundColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 0.1,
-    }]
   };
 
   const options = {
@@ -159,3 +167,5 @@ const DoughnutChart = ({ onSegmentClick }) => {
 };
 
 export default DoughnutChart;
+
+export const doughnutChartData = [20, 150, 2, 700, 29, 140] // Export the total data
