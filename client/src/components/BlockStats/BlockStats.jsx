@@ -42,30 +42,6 @@ const BlockStats = () => {
           endTime={dummyData[0].endTime}
           days={dummyData[0].days}
         />
-        <BlockCard
-          url={dummyData[0].url}
-          startTime={dummyData[0].startTime}
-          endTime={dummyData[0].endTime}
-          days={dummyData[0].days}
-        />
-        <BlockCard
-          url={dummyData[0].url}
-          startTime={dummyData[0].startTime}
-          endTime={dummyData[0].endTime}
-          days={dummyData[0].days}
-        />
-        <BlockCard
-          url={dummyData[0].url}
-          startTime={dummyData[0].startTime}
-          endTime={dummyData[0].endTime}
-          days={dummyData[0].days}
-        />
-        <BlockCard
-          url={dummyData[0].url}
-          startTime={dummyData[0].startTime}
-          endTime={dummyData[0].endTime}
-          days={dummyData[0].days}
-        />
       </div>
     </div>
   );

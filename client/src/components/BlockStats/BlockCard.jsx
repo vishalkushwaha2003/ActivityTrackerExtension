@@ -69,10 +69,17 @@ const BlockCard = ({ url, startTime, endTime, days }) => {
     },
   };
 
+  const handleEdit = () => {
+    //call to backend for updating the block item
+  };
+
   return (
     <div className="bg-card-blur m-4 w-60 h-52 rounded-lg shadow-lg">
       <div className="bg-card-content flex flex-col items-center">
-        <div className="text-[#9b9b9a] absolute right-3 top-3 text-sm hover:cursor-pointer bg-transparent">
+        <div
+          onClick={handleEdit}
+          className="text-[#9b9b9a] absolute right-3 top-3 text-sm hover:cursor-pointer bg-transparent"
+        >
           <EditIcon />
         </div>
 
