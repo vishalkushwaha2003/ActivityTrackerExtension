@@ -30,6 +30,12 @@ const LineChart = ({ data }) => {
         grid: {
           color: 'rgba(51, 65, 85, 0.14)', // Change the color of the x-axis grid lines
         },
+        ticks: {
+          callback: function(value, index, ticks) {
+            const label = this.getLabelForValue(value);
+            return label.length > 10 ? label.slice(0, 10) + '...' : label; // Truncate long labels
+          }
+        }
       },
       y: {
         grid: {

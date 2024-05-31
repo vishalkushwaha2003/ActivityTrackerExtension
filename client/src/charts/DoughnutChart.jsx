@@ -88,7 +88,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
       ctx.fillText(totalRef.current, centerX, centerY - 8); // Adjust y-position for spacing
       
       // Draw the "min" label
-      ctx.font = '14px Arial';
+      ctx.font = '12px Arial';
       ctx.fillStyle = 'yellow'; // Change color for "min"
       ctx.fillText('min', centerX, centerY + 12); // Adjust y-position for spacing
 
@@ -124,15 +124,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
         onSegmentClick(index);
       }
     },
-    hover: {
-      onHover: function(e, elements) {
-        if (elements.length > 0) {
-          e.native.target.style.cursor = 'pointer';
-        } else {
-          e.native.target.style.cursor = 'default';
-        }
-      }
-    },
+   
     animation: {
       animateRotate: true,
       animateScale: true,

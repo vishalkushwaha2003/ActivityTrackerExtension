@@ -8,7 +8,7 @@ const InteractionCharts = () => {
   const initialBgColor = 'rgba(255, 255, 255, 1)'; // Color matching the first segment
 
   const [lineData, setLineData] = useState({
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purpleeeeeeeeeeeeeeeeeeeeee', 'Orange'],
     datasets: [{
       data: initialLineData,
       bgColor: initialBgColor,
@@ -37,7 +37,7 @@ const InteractionCharts = () => {
     ];
 
     setLineData({
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","vish"],
       datasets: [{
         data: newData[index],
         bgColor: backgroundColor[index],
