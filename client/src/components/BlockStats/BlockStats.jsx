@@ -1,34 +1,14 @@
 /* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
 import BlockCard from "./BlockCard";
 
-const dummyData = [
-  {
-    url: "example.com",
-    startTime: "10:00",
-    endTime: "18:00",
-    days: [true, false, false, false, false, false, false],
-  },
-  {
-    url: "abc.com",
-    startTime: "17:00",
-    endTime: "18:00",
-    days: [false, true, false, false, false, false, false],
-  },
-  {
-    url: "def.com",
-    startTime: "09:00",
-    endTime: "18:00",
-    days: [true, true, false, false, false, false, false],
-  },
-  {
-    url: "gef.com",
-    startTime: "08:00",
-    endTime: "18:00",
-    days: [true, true, false, false, false, true, true],
-  },
-];
-
 const BlockStats = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // call for getting the data
+  }, []);
+
   return (
     <div className="flex flex-col justify-center items-center ">
       <div className="text-[#c7c7c6] mt-2 text-base pb-2">
@@ -37,34 +17,10 @@ const BlockStats = () => {
 
       <div className="h-[310px] overflow-y-scroll">
         <BlockCard
-          url={dummyData[0].url}
-          startTime={dummyData[0].startTime}
-          endTime={dummyData[0].endTime}
-          days={dummyData[0].days}
-        />
-        <BlockCard
-          url={dummyData[0].url}
-          startTime={dummyData[0].startTime}
-          endTime={dummyData[0].endTime}
-          days={dummyData[0].days}
-        />
-        <BlockCard
-          url={dummyData[0].url}
-          startTime={dummyData[0].startTime}
-          endTime={dummyData[0].endTime}
-          days={dummyData[0].days}
-        />
-        <BlockCard
-          url={dummyData[0].url}
-          startTime={dummyData[0].startTime}
-          endTime={dummyData[0].endTime}
-          days={dummyData[0].days}
-        />
-        <BlockCard
-          url={dummyData[0].url}
-          startTime={dummyData[0].startTime}
-          endTime={dummyData[0].endTime}
-          days={dummyData[0].days}
+          url={data[0].url}
+          startTime={data[0].startTime}
+          endTime={data[0].endTime}
+          days={data[0].days}
         />
       </div>
     </div>

@@ -125,6 +125,13 @@ const BlockForm = () => {
           <input
             className="mt-3 px-2 py-2 rounded-lg text-[#9b9b9a] bg-[rgba(47,47,47,255)] w-60  border-none focus:outline-none"
             type="text"
+            placeholder="Enter the Name"
+            id="urlInput"
+          />
+
+          <input
+            className="mt-3 px-2 py-2 rounded-lg text-[#9b9b9a] bg-[rgba(47,47,47,255)] w-60  border-none focus:outline-none"
+            type="text"
             placeholder="Enter the URL to block"
             id="urlInput"
           />
