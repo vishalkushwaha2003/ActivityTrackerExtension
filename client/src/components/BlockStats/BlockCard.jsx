@@ -10,7 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const BlockCard = ({ url, startTime, endTime, days }) => {
+const BlockCard = ({ url, startTime, endTime, days, name }) => {
   const timeToMinutes = (time) => {
     const [hour, minutes] = time.split(":").map(Number);
     return hour * 60 + minutes;
@@ -83,7 +83,7 @@ const BlockCard = ({ url, startTime, endTime, days }) => {
           <EditIcon />
         </div>
 
-        <div className="text-[#9b9b9a] text-base">{url}</div>
+        <div className="text-[#9b9b9a] text-base">{name}</div>
 
         <div className="w-60 h-32 -mt-4 flex justify-center">
           <Doughnut data={data} options={options} plugins={[gaugeLabels]} />

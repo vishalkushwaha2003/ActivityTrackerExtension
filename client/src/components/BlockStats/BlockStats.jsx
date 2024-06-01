@@ -3,7 +3,15 @@ import { useEffect, useState } from "react";
 import BlockCard from "./BlockCard";
 
 const BlockStats = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([
+    {
+      url: "www.google.com",
+      name: "Google",
+      startTime: "10:00",
+      endTime: "12:00",
+      days: [true, true, true, false, false, false, false],
+    },
+  ]);
 
   useEffect(() => {
     // call for getting the data
@@ -18,6 +26,7 @@ const BlockStats = () => {
       <div className="h-[310px] overflow-y-scroll">
         <BlockCard
           url={data[0].url}
+          name={data[0].name}
           startTime={data[0].startTime}
           endTime={data[0].endTime}
           days={data[0].days}
