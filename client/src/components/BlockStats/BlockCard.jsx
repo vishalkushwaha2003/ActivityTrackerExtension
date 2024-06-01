@@ -73,6 +73,16 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
     //call to backend for updating the block item
   };
 
+  const activeButtonStyle = {
+    borderColor: "rgba(54, 162, 235, 1)",
+    color: "rgba(54, 162, 235, 1)",
+  };
+
+  const inActiveButtonStyle = {
+    borderColor: "rgba(255, 255, 255, 0.3)",
+    color: "rgba(255, 255, 255, 0.3)",
+  };
+
   return (
     <div className="bg-card-blur m-4 w-60 h-52 rounded-lg shadow-lg">
       <div className="bg-card-content flex flex-col items-center">
@@ -92,63 +102,42 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
         <div className="flex justify-center space-x-2 mt-2">
           <button
             className="w-6 h-6 border rounded-full flex items-center justify-center"
-            style={{
-              borderColor: "rgba(54, 162, 235, 1)",
-              color: "rgba(54, 162, 235, 1)",
-            }}
+            style={days[0] ? activeButtonStyle : inActiveButtonStyle}
           >
             M
           </button>
           <button
-            style={{
-              borderColor: "rgba(255, 255, 255, 0.3)",
-              color: "rgba(255, 255, 255, 0.3)",
-            }}
+            style={days[1] ? activeButtonStyle : inActiveButtonStyle}
             className="w-6 h-6 border rounded-full flex items-center justify-center"
           >
             T
           </button>
           <button
-            style={{
-              borderColor: "rgba(255, 255, 255, 0.3)",
-              color: "rgba(255, 255, 255, 0.3)",
-            }}
+            style={days[2] ? activeButtonStyle : inActiveButtonStyle}
             className="w-6 h-6 border rounded-full flex items-center justify-center"
           >
             W
           </button>
           <button
-            style={{
-              borderColor: "rgba(255, 255, 255, 0.3)",
-              color: "rgba(255, 255, 255, 0.3)",
-            }}
+            style={days[3] ? activeButtonStyle : inActiveButtonStyle}
             className="w-6 h-6 border rounded-full flex items-center justify-center"
           >
             T
           </button>
           <button
-            style={{
-              borderColor: "rgba(255, 255, 255, 0.3)",
-              color: "rgba(255, 255, 255, 0.3)",
-            }}
+            style={days[4] ? activeButtonStyle : inActiveButtonStyle}
             className="w-6 h-6 border rounded-full flex items-center justify-center"
           >
             F
           </button>
           <button
-            style={{
-              borderColor: "rgba(255, 255, 255, 0.3)",
-              color: "rgba(255, 255, 255, 0.3)",
-            }}
+            style={days[5] ? activeButtonStyle : inActiveButtonStyle}
             className="w-6 h-6 border rounded-full flex items-center justify-center"
           >
             S
           </button>
           <button
-            style={{
-              borderColor: "rgba(255, 255, 255, 0.3)",
-              color: "rgba(255, 255, 255, 0.3)",
-            }}
+            style={days[6] ? activeButtonStyle : inActiveButtonStyle}
             className="w-6 h-6 border rounded-full flex items-center justify-center"
           >
             S

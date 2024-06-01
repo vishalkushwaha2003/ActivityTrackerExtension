@@ -1,8 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import BlockCard from "./BlockCard";
-import SearchIcon from "@mui/icons-material/Search";
-import { TextField } from "@mui/material";
 
 const BlockStats = () => {
   const [data, setData] = useState([
@@ -11,28 +10,28 @@ const BlockStats = () => {
       name: "this is Google",
       startTime: "10:00",
       endTime: "12:00",
-      days: [true, true, true, false, false, false, false],
+      days: [false, true, false, false, false, false, false],
     },
     {
       url: "www.google.com",
       name: "Netflix",
       startTime: "10:00",
       endTime: "12:00",
-      days: [true, true, true, false, false, false, false],
+      days: [true, true, false, false, true, false, false],
     },
     {
       url: "www.google.com",
       name: "Facebook",
       startTime: "10:00",
       endTime: "12:00",
-      days: [true, true, true, false, false, false, false],
+      days: [true, true, true, false, false, false, true],
     },
     {
       url: "www.google.com",
       name: "Youtube",
       startTime: "10:00",
       endTime: "12:00",
-      days: [true, true, true, false, false, false, false],
+      days: [true, true, true, false, false, true, false],
     },
   ]);
 

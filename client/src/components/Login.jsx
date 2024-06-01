@@ -1,6 +1,5 @@
 import { Button, TextField } from "@mui/material";
 import { useRef } from "react";
-import axios from "axios";
 
 const Login = () => {
   const emailRef = useRef(null);
