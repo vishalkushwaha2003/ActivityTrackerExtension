@@ -244,7 +244,7 @@ const BlockForm = () => {
               onClick={() => toggleDay(6)}
               className={`w-8 h-8 flex items-center justify-center rounded-full ${
                 selectedDays[6]
-                  ? "bg-bg-[rgb(35,35,35)] border  border-white"
+                  ? "bg-[rgb(35,35,35)] border  border-white"
                   : "bg-[rgba(47,47,47,255)]"
               }`}
             >
