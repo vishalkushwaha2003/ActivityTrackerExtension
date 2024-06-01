@@ -8,7 +8,7 @@ const BlockStats = () => {
   const [data, setData] = useState([
     {
       url: "www.google.com",
-      name: "Google",
+      name: "this is Google",
       startTime: "10:00",
       endTime: "12:00",
       days: [true, true, true, false, false, false, false],
@@ -44,7 +44,13 @@ const BlockStats = () => {
   }, []);
 
   const searchHandler = (e) => {
-    console.log(e.target.value);
+    const val = e.target.value;
+    const newData = data.filter((item) =>
+      item.name
+        .toLowerCase()
+        .includes(val.toLowerCase().replace(/\s+/g, " ").trim())
+    );
+    setFilteredData(newData);
   };
 
   return (
