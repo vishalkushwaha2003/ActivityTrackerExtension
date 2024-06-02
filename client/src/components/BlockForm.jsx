@@ -21,43 +21,43 @@ const BlockForm = () => {
 
   const stompClientRef = useRef(null);
 
-  useEffect(() => {
-    const socket = new SockJS("http://192.168.29.141:8080/server");
-    const stompClient = new Client({
-      webSocketFactory: () => socket,
-      reconnectDelay: 5000,
-      onConnect: () => {
-        console.log("Connected");
-        stompClient.subscribe(
-          "/topic/513a3660-257d-45f9-94eb-5e51d5cdfbaf",
-          (message) => {
-            try {
-              const parsedMessage = JSON.parse(message.body);
-              console.log("Received message:", parsedMessage);
-              setBackendMessage((prevMessages) => [
-                ...prevMessages,
-                parsedMessage,
-              ]);
-            } catch (error) {
-              console.error("Error parsing message:", error);
-            }
-          }
-        );
-      },
-      onStompError: (frame) => {
-        console.error("Broker reported error: " + frame.headers["message"]);
-        console.error("Additional details: " + frame.body);
-      },
-    });
+  // useEffect(() => {
+  //   const socket = new SockJS("http://192.168.29.141:8080/server");
+  //   const stompClient = new Client({
+  //     webSocketFactory: () => socket,
+  //     reconnectDelay: 5000,
+  //     onConnect: () => {
+  //       console.log("Connected");
+  //       stompClient.subscribe(
+  //         "/topic/513a3660-257d-45f9-94eb-5e51d5cdfbaf",
+  //         (message) => {
+  //           try {
+  //             const parsedMessage = JSON.parse(message.body);
+  //             console.log("Received message:", parsedMessage);
+  //             setBackendMessage((prevMessages) => [
+  //               ...prevMessages,
+  //               parsedMessage,
+  //             ]);
+  //           } catch (error) {
+  //             console.error("Error parsing message:", error);
+  //           }
+  //         }
+  //       );
+  //     },
+  //     onStompError: (frame) => {
+  //       console.error("Broker reported error: " + frame.headers["message"]);
+  //       console.error("Additional details: " + frame.body);
+  //     },
+  //   });
 
-    stompClient.activate();
+  //   stompClient.activate();
 
-    stompClientRef.current = stompClient;
+  //   stompClientRef.current = stompClient;
 
-    return () => {
-      stompClient.deactivate();
-    };
-  }, []);
+  //   return () => {
+  //     stompClient.deactivate();
+  //   };
+  // }, []);
 
   const toggleDay = (index) => {
     setSelectedDays((prevState) => {
@@ -76,14 +76,14 @@ const BlockForm = () => {
     const startTime = document.getElementById("startTime").value;
     const endTime = document.getElementById("endTime").value;
 
-    const stompClient = stompClientRef.current;
+    // const stompClient = stompClientRef.current;
 
-    stompClient.publish({
-      destination: "/app/test",
-      body: JSON.stringify({ message: "Block Site Api testing checking" }),
-    });
+    // stompClient.publish({
+    //   destination: "/app/test",
+    //   body: JSON.stringify({ message: "Block Site Api testing checking" }),
+    // });
 
-    console.log(message);
+    // console.log(message);
 
     if (url && startTime && endTime) {
       chrome.storage.local.get({ blockedSites: [] }, (result) => {

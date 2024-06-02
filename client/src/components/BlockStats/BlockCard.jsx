@@ -1,16 +1,19 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { Button, TextField } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import EditIcon from "@mui/icons-material/Edit";
+import BlockFormOnEdit from "../BlockFormOnEdit";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const BlockCard = ({ url, startTime, endTime, days, name }) => {
+  const [isEdit, setIsEdit] = useState(false);
+
   const timeToMinutes = (time) => {
     const [hour, minutes] = time.split(":").map(Number);
     return hour * 60 + minutes;
@@ -42,8 +45,22 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
       legend: {
         display: false,
       },
+      tooltip: false,
     },
     cutout: "80%",
+    elements: {
+      arc: {
+        hoverOffset: 15, // Increase the hover offset to scale the segment
+      },
+    },
+    layout: {
+      padding: {
+        top: 5,
+        bottom: 5,
+        left: 5,
+        right: 5,
+      },
+    },
   };
 
   const gaugeLabels = {
@@ -70,7 +87,11 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
   };
 
   const handleEdit = () => {
-    //call to backend for updating the block item
+    setIsEdit(true);
+  };
+
+  const handleClose = () => {
+    setIsEdit(false);
   };
 
   const activeButtonStyle = {
@@ -84,66 +105,86 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
   };
 
   return (
-    <div className="bg-card-blur m-4 w-60 h-52 rounded-lg shadow-lg">
-      <div className="bg-card-content flex flex-col items-center">
-        <div
-          onClick={handleEdit}
-          className="text-[#9b9b9a] absolute right-3 top-3 text-sm hover:cursor-pointer bg-transparent"
-        >
-          <EditIcon />
-        </div>
+    <div>
+      <div className="bg-card-blur m-4 w-60 h-52 rounded-lg shadow-lg relative">
+        <div className="bg-card-content flex flex-col items-center">
+          <div
+            onClick={handleEdit}
+            className="text-[#9b9b9a] absolute right-3 top-3 text-sm hover:cursor-pointer bg-transparent"
+          >
+            <EditIcon />
+          </div>
 
-        <div className="text-[#9b9b9a] text-base">{name}</div>
+          <div className="text-[#9b9b9a] text-base">{name}</div>
 
-        <div className="w-60 h-32 -mt-4 flex justify-center">
-          <Doughnut data={data} options={options} plugins={[gaugeLabels]} />
-        </div>
+          <div className="w-60 h-32 -mt-4 flex justify-center">
+            <Doughnut data={data} options={options} plugins={[gaugeLabels]} />
+          </div>
 
-        <div className="flex justify-center space-x-2 mt-2">
-          <button
-            className="w-6 h-6 border rounded-full flex items-center justify-center"
-            style={days[0] ? activeButtonStyle : inActiveButtonStyle}
-          >
-            M
-          </button>
-          <button
-            style={days[1] ? activeButtonStyle : inActiveButtonStyle}
-            className="w-6 h-6 border rounded-full flex items-center justify-center"
-          >
-            T
-          </button>
-          <button
-            style={days[2] ? activeButtonStyle : inActiveButtonStyle}
-            className="w-6 h-6 border rounded-full flex items-center justify-center"
-          >
-            W
-          </button>
-          <button
-            style={days[3] ? activeButtonStyle : inActiveButtonStyle}
-            className="w-6 h-6 border rounded-full flex items-center justify-center"
-          >
-            T
-          </button>
-          <button
-            style={days[4] ? activeButtonStyle : inActiveButtonStyle}
-            className="w-6 h-6 border rounded-full flex items-center justify-center"
-          >
-            F
-          </button>
-          <button
-            style={days[5] ? activeButtonStyle : inActiveButtonStyle}
-            className="w-6 h-6 border rounded-full flex items-center justify-center"
-          >
-            S
-          </button>
-          <button
-            style={days[6] ? activeButtonStyle : inActiveButtonStyle}
-            className="w-6 h-6 border rounded-full flex items-center justify-center"
-          >
-            S
-          </button>
+          <div className="flex justify-center space-x-2 mt-2">
+            <button
+              className="w-6 h-6 border rounded-full flex items-center justify-center"
+              style={days[0] ? activeButtonStyle : inActiveButtonStyle}
+            >
+              M
+            </button>
+            <button
+              style={days[1] ? activeButtonStyle : inActiveButtonStyle}
+              className="w-6 h-6 border rounded-full flex items-center justify-center"
+            >
+              T
+            </button>
+            <button
+              style={days[2] ? activeButtonStyle : inActiveButtonStyle}
+              className="w-6 h-6 border rounded-full flex items-center justify-center"
+            >
+              W
+            </button>
+            <button
+              style={days[3] ? activeButtonStyle : inActiveButtonStyle}
+              className="w-6 h-6 border rounded-full flex items-center justify-center"
+            >
+              T
+            </button>
+            <button
+              style={days[4] ? activeButtonStyle : inActiveButtonStyle}
+              className="w-6 h-6 border rounded-full flex items-center justify-center"
+            >
+              F
+            </button>
+            <button
+              style={days[5] ? activeButtonStyle : inActiveButtonStyle}
+              className="w-6 h-6 border rounded-full flex items-center justify-center"
+            >
+              S
+            </button>
+            <button
+              style={days[6] ? activeButtonStyle : inActiveButtonStyle}
+              className="w-6 h-6 border rounded-full flex items-center justify-center"
+            >
+              S
+            </button>
+          </div>
         </div>
       </div>
+
+      {isEdit && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
+          <div className="bg-[rgba(20,20,20,255)] p-4 rounded-md shadow-md flex flex-col items-center w-[90%] h-[80%]">
+            <h1 className="text-base text-[#9b9b9a] mb-4 text-center">
+              Edit {name}
+            </h1>
+            <BlockFormOnEdit
+              name={name}
+              url={url}
+              startTime={startTime}
+              endTime={endTime}
+              days={days}
+              handleClose={handleClose}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
