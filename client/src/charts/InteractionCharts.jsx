@@ -51,9 +51,9 @@ const InteractionCharts = () => {
   return (
     <div>
       <DoughnutChart onSegmentClick={handleSegmentClick} />
-      <div className="flex py-1 justify-center items-center bg-transparent" style={{ color: lineData.datasets[0].bgColor }}>
+      <div className="flex pt-1 mb-0 justify-center items-center bg-transparent" style={{ color: lineData.datasets[0].bgColor }}>
         
-        {index?lineData.labels[index]:'Today Data'}
+        {index==null?'Today Data':lineData.labels[index]}
       </div>
       <LineChart data={lineData} />
     </div>

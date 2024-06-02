@@ -193,12 +193,12 @@ const DoughnutChart = ({ onSegmentClick }) => {
              
             >
               <span
-                className="w-4 h-4 rounded-full"
+                className="w-2 h-2 rounded-full"
                 style={{
                   backgroundColor: data.datasets[0].backgroundColor[index],
                 }}
               ></span>
-              <span className="text-white">{label}</span>
+              <span className="text-white text-sm">{label}</span>
             </div>
           ))}
         </div>
