@@ -28,6 +28,13 @@ const BlockStats = () => {
     },
     {
       url: "www.google.com",
+      name: "Facebook",
+      startTime: "12:00",
+      endTime: "13:00",
+      days: [true, true, true, false, false, false, true],
+    },
+    {
+      url: "www.google.com",
       name: "Youtube",
       startTime: "11:00",
       endTime: "12:00",

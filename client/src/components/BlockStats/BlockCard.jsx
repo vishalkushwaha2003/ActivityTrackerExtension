@@ -13,6 +13,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const BlockCard = ({ url, startTime, endTime, days, name }) => {
   const [isEdit, setIsEdit] = useState(false);
+  const today = (new Date().getDay() + 6) % 7;
 
   const timeToMinutes = (time) => {
     const [hour, minutes] = time.split(":").map(Number);
@@ -29,14 +30,19 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
   if (remainingMinutes < 0) remainingMinutes = 0;
   console.log(name + " " + passedMinutes + " " + remainingMinutes);
 
+  const red = "rgba(255, 99, 132, 1)";
+  const green = "rgba(75, 192, 192, 1)";
+  const gaugeColor =
+    remainingMinutes === 0 ? [green, red] : [red, "rgba(47,47,47,255)"];
+
   const data = {
     labels: ["Time passed", "Time Remaining"],
     datasets: [
       {
         label: "Time",
         data: [passedMinutes, remainingMinutes],
-        backgroundColor: ["rgba(54, 162, 235, 1)", "rgba(47, 47, 47, 255)"],
-        borderColor: ["rgba(54, 162, 235, 1)", "rgba(47, 47, 47, 255)"],
+        backgroundColor: gaugeColor,
+        borderColor: gaugeColor,
         circumference: 180,
         rotation: 270,
       },
@@ -53,7 +59,7 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
     cutout: "80%",
     elements: {
       arc: {
-        hoverOffset: 15, // Increase the hover offset to scale the segment
+        hoverOffset: 15,
       },
     },
     layout: {
@@ -98,13 +104,28 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
   };
 
   const activeButtonStyle = {
-    borderColor: "rgba(54, 162, 235, 1)",
-    color: "rgba(54, 162, 235, 1)",
+    borderColor: green,
+    color: green,
   };
 
   const inActiveButtonStyle = {
     borderColor: "rgba(255, 255, 255, 0.3)",
     color: "rgba(255, 255, 255, 0.3)",
+  };
+
+  const todayButtonStyle = {
+    borderColor: red,
+    color: red,
+  };
+
+  const styles = (day) => {
+    return days[day]
+      ? today === day
+        ? remainingMinutes === 0
+          ? activeButtonStyle
+          : todayButtonStyle
+        : activeButtonStyle
+      : inActiveButtonStyle;
   };
 
   return (
@@ -127,42 +148,42 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
           <div className="flex justify-center space-x-2 mt-2">
             <button
               className="w-6 h-6 border rounded-full flex items-center justify-center"
-              style={days[0] ? activeButtonStyle : inActiveButtonStyle}
+              style={styles(0)}
             >
               M
             </button>
             <button
-              style={days[1] ? activeButtonStyle : inActiveButtonStyle}
+              style={styles(1)}
               className="w-6 h-6 border rounded-full flex items-center justify-center"
             >
               T
             </button>
             <button
-              style={days[2] ? activeButtonStyle : inActiveButtonStyle}
+              style={styles(2)}
               className="w-6 h-6 border rounded-full flex items-center justify-center"
             >
               W
             </button>
             <button
-              style={days[3] ? activeButtonStyle : inActiveButtonStyle}
+              style={styles(3)}
               className="w-6 h-6 border rounded-full flex items-center justify-center"
             >
               T
             </button>
             <button
-              style={days[4] ? activeButtonStyle : inActiveButtonStyle}
+              style={styles(4)}
               className="w-6 h-6 border rounded-full flex items-center justify-center"
             >
               F
             </button>
             <button
-              style={days[5] ? activeButtonStyle : inActiveButtonStyle}
+              style={styles(5)}
               className="w-6 h-6 border rounded-full flex items-center justify-center"
             >
               S
             </button>
             <button
-              style={days[6] ? activeButtonStyle : inActiveButtonStyle}
+              style={styles(6)}
               className="w-6 h-6 border rounded-full flex items-center justify-center"
             >
               S
