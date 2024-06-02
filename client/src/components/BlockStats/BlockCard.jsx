@@ -24,7 +24,10 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
   const totalMinutes = endMinutes - startMinutes;
   const currentMinutes = new Date().getHours() * 60 + new Date().getMinutes();
   const passedMinutes = currentMinutes - startMinutes;
-  const remainingMinutes = totalMinutes - passedMinutes;
+  let remainingMinutes = totalMinutes - passedMinutes;
+
+  if (remainingMinutes < 0) remainingMinutes = 0;
+  console.log(name + " " + passedMinutes + " " + remainingMinutes);
 
   const data = {
     labels: ["Time passed", "Time Remaining"],
@@ -57,8 +60,8 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
       padding: {
         top: 5,
         bottom: 5,
-        left: 5,
-        right: 5,
+        left: 15,
+        right: 15,
       },
     },
   };
@@ -81,8 +84,8 @@ const BlockCard = ({ url, startTime, endTime, days, name }) => {
         ctx.fillText(text, positionX + offsetX, bottom + offsetY);
       }
 
-      labels("0", "left", left, 4, -10);
-      labels("9", "right", right, -4, -10);
+      labels(startTime, "left", left, -12, -10);
+      labels(endTime, "right", right, 14, -10);
     },
   };
 
