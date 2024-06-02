@@ -40,6 +40,13 @@ const BlockStats = () => {
       endTime: "12:00",
       days: [true, true, true, false, false, true, false],
     },
+    {
+      url: "www.google.com",
+      name: "Instagram",
+      startTime: "11:00",
+      endTime: "24:00",
+      days: [true, false, true, false, false, true, false],
+    },
   ]);
 
   const [filteredData, setFilteredData] = useState([]);
