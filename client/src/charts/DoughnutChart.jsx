@@ -8,6 +8,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
   const chartRef = useRef(null);
   const [total, setTotal] = useState(0);
   const totalRef = useRef(total);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const data = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -160,7 +161,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
         onSegmentClick(index);
       }
     },
-    
+
     animation: {
       animateRotate: true,
       animateScale: true,
@@ -182,15 +183,15 @@ const DoughnutChart = ({ onSegmentClick }) => {
           ref={chartRef}
         />
       </div>
-      <div className="px-2 w-full  overflow-x-auto">
+      <div className="px-2 w-full overflow-x-auto">
         <div className="flex mb-2 space-x-4">
           {data.labels.map((label, index) => (
             <div
               key={index}
               className="flex items-center space-x-1 hover:cursor-pointer"
               onClick={() => onSegmentClick(index)}
-             
-             
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
               <span
                 className="w-2 h-2 rounded-full"
@@ -198,7 +199,17 @@ const DoughnutChart = ({ onSegmentClick }) => {
                   backgroundColor: data.datasets[0].backgroundColor[index],
                 }}
               ></span>
-              <span className="text-white text-sm">{label}</span>
+              <span
+                className="text-white text-sm"
+                style={{
+                  color:
+                    hoveredIndex === index
+                      ? data.datasets[0].backgroundColor[index]
+                      : "white", // Change text color dynamically based on chart color
+                }}
+              >
+                {label}
+              </span>
             </div>
           ))}
         </div>
