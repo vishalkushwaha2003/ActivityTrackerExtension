@@ -6,9 +6,10 @@ const InteractionCharts = () => {
   // Initialize line chart data with the total data from doughnut chart
   const initialLineData = doughnutChartData;
   const initialBgColor = 'rgba(255, 255, 255, 1)'; // Color matching the first segment
-
+  const [index, setIndex] = useState(null);
+ 
   const [lineData, setLineData] = useState({
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purpleeeeeeeeeeeeeeeeeeeeee', 'Orange'],
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [{
       data: initialLineData,
       bgColor: initialBgColor,
@@ -35,9 +36,9 @@ const InteractionCharts = () => {
       'rgba(153, 102, 255, 1)',
       'rgba(255, 159, 64, 1)',
     ];
-
+    setIndex(index);
     setLineData({
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","vish"],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "vish"],
       datasets: [{
         data: newData[index],
         bgColor: backgroundColor[index],
@@ -50,6 +51,10 @@ const InteractionCharts = () => {
   return (
     <div>
       <DoughnutChart onSegmentClick={handleSegmentClick} />
+      <div className="flex py-1 justify-center items-center bg-transparent" style={{ color: lineData.datasets[0].bgColor }}>
+        
+        {index?lineData.labels[index]:'Today Data'}
+      </div>
       <LineChart data={lineData} />
     </div>
   );

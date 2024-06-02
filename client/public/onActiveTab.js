@@ -80,7 +80,8 @@ chrome.tabs.onActivated.addListener(() => {
 
 
 function sendPreTabData(tabData) {
-  fetch('http://192.168.29.141:8080/tabs/closedTab', {
+  console.log(tabData);
+  fetch('http://13.233.68.11:8080/tabs/closedTab', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -111,7 +112,8 @@ function sendPreTabData(tabData) {
 
 
 function sendCreatTabData(tabData) {
-  fetch('http://192.168.29.141:8080/tabs/activeTab', {
+  console.log(tabData);
+  fetch('http://13.233.68.11:8080/tabs/activeTab', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

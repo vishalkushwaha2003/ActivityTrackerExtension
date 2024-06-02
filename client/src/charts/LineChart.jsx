@@ -52,7 +52,7 @@ const LineChart = ({ data }) => {
   const chartWidth = labelCount * 50; // 50px per label, adjust as needed
 
   return (
-    <div className="w-full py-5 overflow-x-auto">
+    <div className="w-full  overflow-x-auto">
       <div className="relative h-[200px] overflow-y-auto" style={{ width: `${chartWidth}px` }}>
         <Line data={chartData} options={options} />
       </div>

@@ -182,14 +182,14 @@ const DoughnutChart = ({ onSegmentClick }) => {
           ref={chartRef}
         />
       </div>
-      <div className="px-2 w-full cursor-grab overflow-x-auto">
-        <div className="flex mb-4 space-x-4">
+      <div className="px-2 w-full  overflow-x-auto">
+        <div className="flex mb-2 space-x-4">
           {data.labels.map((label, index) => (
             <div
               key={index}
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-1 hover:cursor-pointer"
               onClick={() => onSegmentClick(index)}
-              onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
+             
              
             >
               <span
