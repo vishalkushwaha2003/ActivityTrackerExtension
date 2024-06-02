@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
+import React, { useRef, useEffect, useState } from "react";
+import { Doughnut } from "react-chartjs-2";
+import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -10,33 +10,38 @@ const DoughnutChart = ({ onSegmentClick }) => {
   const totalRef = useRef(total);
 
   const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [{
-      label: 'Dataset 1',
-      data: [20, 150, 2, 700, 29, 140],
-      backgroundColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 0.1,
-    }]
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [20, 150, 2, 700, 29, 140],
+        backgroundColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 0.1,
+      },
+    ],
   };
 
   useEffect(() => {
     const chart = chartRef.current;
-    const totalValue = chart.data.datasets[0].data.reduce((acc, curr) => acc + curr, 0);
+    const totalValue = chart.data.datasets[0].data.reduce(
+      (acc, curr) => acc + curr,
+      0
+    );
 
     const incrementTotal = (start, end, duration) => {
       const startTime = performance.now();
@@ -57,10 +62,13 @@ const DoughnutChart = ({ onSegmentClick }) => {
       requestAnimationFrame(animate);
     };
 
+    const handleAnimation = () => {
+      incrementTotal(0, totalValue, 1000); // Animate over 1 second
+    };
+
     chart.options.animation = {
-      onProgress: () => {
-        incrementTotal(0, totalValue, 1000); // Animate over 1 second
-      },
+      duration: 1000,
+      onProgress: handleAnimation,
     };
 
     chart.update();
@@ -71,29 +79,60 @@ const DoughnutChart = ({ onSegmentClick }) => {
   }, [total]);
 
   const totalCenterPlugin = {
-    id: 'totalCenterPlugin',
-    beforeDraw: function(chart) {
-      const { ctx, chartArea: { top, bottom, left, right } } = chart;
+    id: "totalCenterPlugin",
+    beforeDraw: function (chart) {
+      const {
+        ctx,
+        chartArea: { top, bottom, left, right },
+      } = chart;
       ctx.save();
-      
+
       // Calculate positions
       const centerX = (left + right) / 2;
       const centerY = (top + bottom) / 2;
-      
+
       // Draw the total value
-      ctx.font = 'bold 20px Arial';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = 'white';
+      ctx.font = "bold 20px Arial";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = "white";
       ctx.fillText(totalRef.current, centerX, centerY - 8); // Adjust y-position for spacing
-      
+
       // Draw the "min" label
-      ctx.font = '12px Arial';
-      ctx.fillStyle = 'yellow'; // Change color for "min"
-      ctx.fillText('min', centerX, centerY + 12); // Adjust y-position for spacing
+      ctx.font = "12px Arial";
+      ctx.fillStyle = "yellow"; // Change color for "min"
+      ctx.fillText("min", centerX, centerY + 12); // Adjust y-position for spacing
 
       ctx.restore();
-    }
+    },
+  };
+
+  const customTooltip = {
+    id: "customTooltip",
+    beforeRender(chart) {
+      const tooltip = chart.tooltip;
+
+      if (tooltip && tooltip.opacity > 0) {
+        const tooltipModel = tooltip.dataPoints[0];
+        if (tooltipModel) {
+          const { ctx } = chart;
+          const { element } = tooltipModel;
+          const { x, y } = element.tooltipPosition();
+
+          const { label, formattedValue } = tooltipModel;
+
+          ctx.save();
+          ctx.font = "bold 12px Arial";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+          ctx.fillRect(x - 50, y - 40, 100, 30); // Background box for tooltip
+          ctx.fillStyle = "#fff";
+          ctx.fillText(`${label}: ${formattedValue}`, x, y - 25);
+          ctx.restore();
+        }
+      }
+    },
   };
 
   const options = {
@@ -104,19 +143,16 @@ const DoughnutChart = ({ onSegmentClick }) => {
         top: 20,
         bottom: 20,
         left: 20,
-        right: 20
-      }
+        right: 20,
+      },
     },
     plugins: {
       legend: {
         display: false,
       },
       tooltip: {
-        backgroundColor: 'rgba(22,22,22,1)',
-        titleColor: '#fff',
-        bodyColor: '#fff',
-        footerColor: '#fff'
-      }
+        enabled: false, // Disable the default tooltip
+      },
     },
     onClick: (e, activeElements) => {
       if (activeElements.length > 0) {
@@ -124,7 +160,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
         onSegmentClick(index);
       }
     },
-   
+    
     animation: {
       animateRotate: true,
       animateScale: true,
@@ -132,22 +168,35 @@ const DoughnutChart = ({ onSegmentClick }) => {
     elements: {
       arc: {
         hoverOffset: 15, // Increase the hover offset to scale the segment
-      }
-    }
+      },
+    },
   };
 
   return (
     <div className="flex flex-col items-center bg-transparent">
       <div className="h-[200px] mt-9">
-        <Doughnut data={data} options={options} plugins={[totalCenterPlugin]} ref={chartRef} />
+        <Doughnut
+          data={data}
+          options={options}
+          plugins={[totalCenterPlugin, customTooltip]}
+          ref={chartRef}
+        />
       </div>
       <div className="px-2 w-full cursor-grab overflow-x-auto">
         <div className="flex mb-4 space-x-4">
           {data.labels.map((label, index) => (
-            <div key={index} className="flex items-center space-x-2">
+            <div
+              key={index}
+              className="flex items-center space-x-2"
+              onClick={() => onSegmentClick(index)}
+              onMouseEnter={(e) => (e.target.style.cursor = "pointer")}
+             
+            >
               <span
                 className="w-4 h-4 rounded-full"
-                style={{ backgroundColor: data.datasets[0].backgroundColor[index] }}
+                style={{
+                  backgroundColor: data.datasets[0].backgroundColor[index],
+                }}
               ></span>
               <span className="text-white">{label}</span>
             </div>
@@ -160,4 +209,4 @@ const DoughnutChart = ({ onSegmentClick }) => {
 
 export default DoughnutChart;
 
-export const doughnutChartData = [20, 150, 2, 700, 29, 140] // Export the total data
+export const doughnutChartData = [20, 150, 2, 700, 29, 140]; // Export the total data
