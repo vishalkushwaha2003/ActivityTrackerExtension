@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
 import { useEffect, useState, useRef } from "react";
@@ -263,7 +264,7 @@ const BlockForm = () => {
         </div>
 
         {isOverlay && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center backdrop-blur-sm items-center z-50">
             <div className="bg-[rgba(20,20,20,255)] p-4 rounded-md shadow-md flex flex-col items-center">
               <h1 className="text-base mb-4 text-center">{message}</h1>
               <button
