@@ -184,7 +184,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
   return (
     <div className="flex flex-col items-center bg-transparent">
       <div className="relative">
-        <div className="h-[200px] mt-9">
+        <div className="h-[200px] mt-12">
           <Doughnut
             data={data}
             options={options}
@@ -198,12 +198,12 @@ const DoughnutChart = ({ onSegmentClick }) => {
             style={{ width: '85px'}} // Smooth transition
           >
             <p>{info.value}</p>
-            <p className="truncate">{info.label}</p>
+            <p className="truncate">{info.label}jknknk</p>
           </div>
         )}
       </div>
-      <div className="px-2 w-full overflow-x-auto">
-        <div className="flex mb-2 space-x-4">
+      <div className="px-2 w-full  overflow-x-auto">
+        <div className="flex mb-2  space-x-4">
           {data.labels.map((label, index) => (
             <div
               key={index}
