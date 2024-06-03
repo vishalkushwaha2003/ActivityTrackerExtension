@@ -1,4 +1,4 @@
-importScripts('timer.js','onUpdateTab.js','onActiveTab.js');
+importScripts('timer.js','onUpdateTab.js','onActiveTab.js','dateAndTime.js');
   
 
 inactivePreTabInfo1 = {};

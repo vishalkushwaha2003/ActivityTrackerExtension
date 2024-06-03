@@ -195,7 +195,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
         {showInfo && (
           <div
             className="absolute top-[40px] right-[-50px] pl-2 bg-transparent text-white text-[13px] space-y-[-2px] rounded transition-opacity duration-500 ease-in-out"
-            style={{ width: '85px'}} // Smooth transition
+            style={{ width: '85px'}}
           >
             <p>{info.value}</p>
             <p className="truncate">{info.label}jknknk</p>
