@@ -9,6 +9,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
   const [total, setTotal] = useState(0);
   const totalRef = useRef(total);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [info, setInfo] = useState(null); // State for displaying information
 
   const data = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -159,6 +160,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
       if (activeElements.length > 0) {
         const index = activeElements[0].index;
         onSegmentClick(index);
+        setInfo({ label: data.labels[index], value: data.datasets[0].data[index] }); // Set info state
       }
     },
 
@@ -175,13 +177,24 @@ const DoughnutChart = ({ onSegmentClick }) => {
 
   return (
     <div className="flex flex-col items-center bg-transparent">
-      <div className="h-[200px] mt-9">
-        <Doughnut
-          data={data}
-          options={options}
-          plugins={[totalCenterPlugin, customTooltip]}
-          ref={chartRef}
-        />
+      <div className="relative">
+        <div className="h-[200px] mt-9">
+          <Doughnut
+            data={data}
+            options={options}
+            plugins={[totalCenterPlugin, customTooltip]}
+            ref={chartRef}
+          />
+        </div>
+        {info && (
+          <div
+            className="absolute  top-[30px] right-[-25px] p-2 bg-black bg-transparent text-white/60 text-[12px] space-y-[-2px] rounded"
+            style={{ width: '50px' }}
+          >
+            <p>{info.label}llj</p>
+            <p>{info.value}</p>
+          </div>
+        )}
       </div>
       <div className="px-2 w-full overflow-x-auto">
         <div className="flex mb-2 space-x-4">
