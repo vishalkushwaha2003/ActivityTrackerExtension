@@ -9,7 +9,8 @@ const DoughnutChart = ({ onSegmentClick }) => {
   const [total, setTotal] = useState(0);
   const totalRef = useRef(total);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [info, setInfo] = useState(null); // State for displaying information
+  const [info, setInfo] = useState({ label: "", value: 0 });
+  const [showInfo, setShowInfo] = useState(false);
 
   const data = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -161,6 +162,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
         const index = activeElements[0].index;
         onSegmentClick(index);
         setInfo({ label: data.labels[index], value: data.datasets[0].data[index] }); // Set info state
+        setShowInfo(true); // Show info box
       }
     },
 
@@ -186,13 +188,13 @@ const DoughnutChart = ({ onSegmentClick }) => {
             ref={chartRef}
           />
         </div>
-        {info && (
+        {showInfo && (
           <div
-            className="absolute  top-[30px] right-[-25px] p-2 bg-black bg-transparent text-white/60 text-[12px] space-y-[-2px] rounded"
-            style={{ width: '50px' }}
+            className="absolute top-[40px] right-[-50px] pl-2 bg-transparent text-white text-[13px] space-y-[-2px] rounded transition-opacity duration-500 ease-in-out"
+            style={{ width: '85px'}} // Smooth transition
           >
-            <p>{info.label}llj</p>
             <p>{info.value}</p>
+            <p className="truncate">{info.label}kjjnkjnkn</p>
           </div>
         )}
       </div>
