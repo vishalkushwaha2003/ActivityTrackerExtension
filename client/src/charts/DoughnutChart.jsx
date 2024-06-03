@@ -160,9 +160,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
     onClick: (e, activeElements) => {
       if (activeElements.length > 0) {
         const index = activeElements[0].index;
-        onSegmentClick(index);
-        setInfo({ label: data.labels[index], value: data.datasets[0].data[index] }); // Set info state
-        setShowInfo(true); // Show info box
+        handleSegmentClick(index);
       }
     },
 
@@ -175,6 +173,12 @@ const DoughnutChart = ({ onSegmentClick }) => {
         hoverOffset: 15, // Increase the hover offset to scale the segment
       },
     },
+  };
+
+  const handleSegmentClick = (index) => {
+    onSegmentClick(index);
+    setInfo({ label: data.labels[index], value: data.datasets[0].data[index] }); // Set info state
+    setShowInfo(true); // Show info box
   };
 
   return (
@@ -194,7 +198,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
             style={{ width: '85px'}} // Smooth transition
           >
             <p>{info.value}</p>
-            <p className="truncate">{info.label}kjjnkjnkn</p>
+            <p className="truncate">{info.label}</p>
           </div>
         )}
       </div>
@@ -204,7 +208,7 @@ const DoughnutChart = ({ onSegmentClick }) => {
             <div
               key={index}
               className="flex items-center space-x-1 hover:cursor-pointer"
-              onClick={() => onSegmentClick(index)}
+              onClick={() => handleSegmentClick(index)}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
