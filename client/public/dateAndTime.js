@@ -13,4 +13,4 @@ const date=`${day}:${month}:${year}`
 console.log(totalMinutes);
 console.log(date)
 
-// Outputs something like: 2024-6-3 14:30:45
+
